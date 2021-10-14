@@ -13,62 +13,62 @@ library(tidyverse)
 
 ## Inladen klimaat data per sector
 ```{r}
-A1_klimaat <- read_delim('./data/klimaat/File1A_VDklimaat.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '1', side = 'Rear')
-V1_klimaat <- read_delim('./data/klimaat/File1V_VDklimaat.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '1', side = 'Front')
-A2_klimaat <- read_delim('./data/klimaat/File2A_VDklimaat.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '2', side = 'Rear')
-V2_klimaat <- read_delim('./data/klimaat/File2V_VDklimaat.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '2', side = 'Front')
-A5_klimaat <- read_delim('./data/klimaat/File5A_VDklimaat.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '5', side = 'Rear')
-V5_klimaat <- read_delim('./data/klimaat/File5V_VDklimaat.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '5', side = 'Front')
-A6_klimaat <- read_delim('./data/klimaat/File6A_VDklimaat.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '6', side = 'Rear')
-V6_klimaat <- read_delim('./data/klimaat/File6V_VDklimaat.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '6', side = 'Front')
+A1_klimaat <- read_delim('./data/binnen/vd_klimaat/1A_vd_klimaat.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '1', side = 'Rear')
+V1_klimaat <- read_delim('./data/binnen/vd_klimaat/1V_vd_klimaat.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '1', side = 'Front')
+A2_klimaat <- read_delim('./data/binnen/vd_klimaat/2A_vd_klimaat.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '2', side = 'Rear')
+V2_klimaat <- read_delim('./data/binnen/vd_klimaat/2V_vd_klimaat.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '2', side = 'Front')
+A5_klimaat <- read_delim('./data/binnen/vd_klimaat/5A_vd_klimaat.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '5', side = 'Rear')
+V5_klimaat <- read_delim('./data/binnen/vd_klimaat/5V_vd_klimaat.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '5', side = 'Front')
+A6_klimaat <- read_delim('./data/binnen/vd_klimaat/6A_vd_klimaat.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '6', side = 'Rear')
+V6_klimaat <- read_delim('./data/binnen/vd_klimaat/6V_vd_klimaat.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '6', side = 'Front')
 ```
 
 ## Inladen temperatuur data per sector
 ```{r}
-A1_temperatuur <- read_delim('./data/temperatuur/File1A_kastemperatuurklimaat.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '1', side = 'Rear')
-V1_temperatuur <- read_delim('./data/temperatuur/File1V_kastemperatuurklimaat.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '1', side = 'Front')
-A2_temperatuur <- read_delim('./data/temperatuur/File2A_kastemperatuurklimaat.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '2', side = 'Rear')
-V2_temperatuur <- read_delim('./data/temperatuur/File2V_kastemperatuurklimaat.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '2', side = 'Front')
-A5_temperatuur <- read_delim('./data/temperatuur/File5A_kastemperatuurklimaat.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '5', side = 'Rear')
-V5_temperatuur <- read_delim('./data/temperatuur/File5V_kastemperatuurklimaat.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '5', side = 'Front')
-A6_temperatuur <- read_delim('./data/temperatuur/File6A_kastemperatuurklimaat.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '6', side = 'Rear')
-V6_temperatuur <- read_delim('./data/temperatuur/File6V_kastemperatuurklimaat.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '6', side = 'Front')
+A1_temperatuur <- read_delim('./data/binnen/temperatuur/1A_kastemperatuurklimaat.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '1', side = 'Rear')
+V1_temperatuur <- read_delim('./data/binnen/temperatuur/1V_kastemperatuurklimaat.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '1', side = 'Front')
+A2_temperatuur <- read_delim('./data/binnen/temperatuur/2A_kastemperatuurklimaat.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '2', side = 'Rear')
+V2_temperatuur <- read_delim('./data/binnen/temperatuur/2V_kastemperatuurklimaat.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '2', side = 'Front')
+A5_temperatuur <- read_delim('./data/binnen/temperatuur/5A_kastemperatuurklimaat.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '5', side = 'Rear')
+V5_temperatuur <- read_delim('./data/binnen/temperatuur/5V_kastemperatuurklimaat.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '5', side = 'Front')
+A6_temperatuur <- read_delim('./data/binnen/temperatuur/6A_kastemperatuurklimaat.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '6', side = 'Rear')
+V6_temperatuur <- read_delim('./data/binnen/temperatuur/6V_kastemperatuurklimaat.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '6', side = 'Front')
 ```
 
 ## Inladen CO2 data per sector
 ```{r}
-A1_co2 <- read_delim('./data/co2/File1A_CO2.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '1', side = 'Rear')
-V1_co2 <- read_delim('./data/co2/File1V_CO2.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '1', side = 'Front')
-A2_co2 <- read_delim('./data/co2/File2A_CO2.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '2', side = 'Rear')
-V2_co2 <- read_delim('./data/co2/File2V_CO2.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '2', side = 'Front')
-A5_co2 <- read_delim('./data/co2/File5A_CO2.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '5', side = 'Rear')
-V5_co2 <- read_delim('./data/co2/File5V_CO2.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '5', side = 'Front')
-A6_co2 <- read_delim('./data/co2/File6A_CO2.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '6', side = 'Rear')
-V6_co2 <- read_delim('./data/co2/File6V_CO2.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '6', side = 'Front')
+A1_co2 <- read_delim('./data/binnen/co2/1A_CO2.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '1', side = 'Rear')
+V1_co2 <- read_delim('./data/binnen/co2/1V_CO2.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '1', side = 'Front')
+A2_co2 <- read_delim('./data/binnen/co2/2A_CO2.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '2', side = 'Rear')
+V2_co2 <- read_delim('./data/binnen/co2/2V_CO2.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '2', side = 'Front')
+A5_co2 <- read_delim('./data/binnen/co2/5A_CO2.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '5', side = 'Rear')
+V5_co2 <- read_delim('./data/binnen/co2/5V_CO2.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '5', side = 'Front')
+A6_co2 <- read_delim('./data/binnen/co2/6A_CO2.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '6', side = 'Rear')
+V6_co2 <- read_delim('./data/binnen/co2/6V_CO2.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '6', side = 'Front')
 ```
 
 ## Inladen assimilatiebelichting per sector
 ```{r}
-A1_assimilatiebelichting <- read_delim('./data/assimilatiebelichting/File1A_assimilatiebelichting.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '1', side = 'Rear')
-V1_assimilatiebelichting <- read_delim('./data/assimilatiebelichting/File1V_assimilatiebelichting.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '1', side = 'Front')
-A2_assimilatiebelichting <- read_delim('./data/assimilatiebelichting/File2A_assimilatiebelichting.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '2', side = 'Rear')
-V2_assimilatiebelichting <- read_delim('./data/assimilatiebelichting/File2V_assimilatiebelichting.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '2', side = 'Front')
-A5_assimilatiebelichting <- read_delim('./data/assimilatiebelichting/File5A_assimilatiebelichting.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '5', side = 'Rear')
-V5_assimilatiebelichting <- read_delim('./data/assimilatiebelichting/File5V_assimilatiebelichting.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '5', side = 'Front')
-A6_assimilatiebelichting <- read_delim('./data/assimilatiebelichting/File6A_assimilatiebelichting.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '6', side = 'Rear')
-V6_assimilatiebelichting <- read_delim('./data/assimilatiebelichting/File6V_assimilatiebelichting.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '6', side = 'Front')
+A1_assimilatiebelichting <- read_delim('./data/binnen/assimilatiebelichting/1A_assimilatiebelichting.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '1', side = 'Rear')
+V1_assimilatiebelichting <- read_delim('./data/binnen/assimilatiebelichting/1V_assimilatiebelichting.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '1', side = 'Front')
+A2_assimilatiebelichting <- read_delim('./data/binnen/assimilatiebelichting/2A_assimilatiebelichting.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '2', side = 'Rear')
+V2_assimilatiebelichting <- read_delim('./data/binnen/assimilatiebelichting/2V_assimilatiebelichting.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '2', side = 'Front')
+A5_assimilatiebelichting <- read_delim('./data/binnen/assimilatiebelichting/5A_assimilatiebelichting.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '5', side = 'Rear')
+V5_assimilatiebelichting <- read_delim('./data/binnen/assimilatiebelichting/5V_assimilatiebelichting.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '5', side = 'Front')
+A6_assimilatiebelichting <- read_delim('./data/binnen/assimilatiebelichting/6A_assimilatiebelichting.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '6', side = 'Rear')
+V6_assimilatiebelichting <- read_delim('./data/binnen/assimilatiebelichting/6V_assimilatiebelichting.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '6', side = 'Front')
 ```
 
 ## Inladen stand van luwezijderaam per sector
 ```{r}
-A1_luwezijderaamstand <- read_delim('./data/luwezijderaamstand/File1A_luwezijderaamstand.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '1', side = 'Rear')
-V1_luwezijderaamstand <- read_delim('./data/luwezijderaamstand/File1V_luwezijderaamstand.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '1', side = 'Front')
-A2_luwezijderaamstand <- read_delim('./data/luwezijderaamstand/File2A_luwezijderaamstand.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '2', side = 'Rear')
-V2_luwezijderaamstand <- read_delim('./data/luwezijderaamstand/File2V_luwezijderaamstand.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '2', side = 'Front')
-A5_luwezijderaamstand <- read_delim('./data/luwezijderaamstand/File5A_luwezijderaamstand.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '5', side = 'Rear')
-V5_luwezijderaamstand <- read_delim('./data/luwezijderaamstand/File5V_luwezijderaamstand.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '5', side = 'Front')
-A6_luwezijderaamstand <- read_delim('./data/luwezijderaamstand/File6A_luwezijderaamstand.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '6', side = 'Rear')
-V6_luwezijderaamstand <- read_delim('./data/luwezijderaamstand/File6V_luwezijderaamstand.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '6', side = 'Front')
+A1_luwezijderaamstand <- read_delim('./data/binnen/luwezijderaamstand/1A_luwezijderaamstand.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '1', side = 'Rear')
+V1_luwezijderaamstand <- read_delim('./data/binnen/luwezijderaamstand/1V_luwezijderaamstand.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '1', side = 'Front')
+A2_luwezijderaamstand <- read_delim('./data/binnen/luwezijderaamstand/2A_luwezijderaamstand.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '2', side = 'Rear')
+V2_luwezijderaamstand <- read_delim('./data/binnen/luwezijderaamstand/2V_luwezijderaamstand.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '2', side = 'Front')
+A5_luwezijderaamstand <- read_delim('./data/binnen/luwezijderaamstand/5A_luwezijderaamstand.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '5', side = 'Rear')
+V5_luwezijderaamstand <- read_delim('./data/binnen/luwezijderaamstand/5V_luwezijderaamstand.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '5', side = 'Front')
+A6_luwezijderaamstand <- read_delim('./data/binnen/luwezijderaamstand/6A_luwezijderaamstand.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '6', side = 'Rear')
+V6_luwezijderaamstand <- read_delim('./data/binnen/luwezijderaamstand/6V_luwezijderaamstand.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '6', side = 'Front')
 ```
 
 ## Samenvoegen van data in tibbles
