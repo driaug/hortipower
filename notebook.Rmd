@@ -1,0 +1,108 @@
+---
+title: "Hortipower Notebook"
+output: html_notebook
+---
+
+```{r}
+# install.packages("tidyverse")
+```
+
+```{r}
+library(tidyverse)
+```
+
+## Inladen klimaat data per sector
+```{r}
+A1_klimaat <- read_delim('./data/klimaat/File1A_VDklimaat.txt', delim=';') %>% mutate(sector = '1', side = 'Rear')
+V1_klimaat <- read_delim('./data/klimaat/File1V_VDklimaat.txt', delim=';') %>% mutate(sector = '1', side = 'Front')
+A2_klimaat <- read_delim('./data/klimaat/File2A_VDklimaat.txt', delim=';') %>% mutate(sector = '2', side = 'Rear')
+V2_klimaat <- read_delim('./data/klimaat/File2V_VDklimaat.txt', delim=';') %>% mutate(sector = '2', side = 'Front')
+A5_klimaat <- read_delim('./data/klimaat/File5A_VDklimaat.txt', delim=';') %>% mutate(sector = '5', side = 'Rear')
+V5_klimaat <- read_delim('./data/klimaat/File5V_VDklimaat.txt', delim=';') %>% mutate(sector = '5', side = 'Front')
+A6_klimaat <- read_delim('./data/klimaat/File6A_VDklimaat.txt', delim=';') %>% mutate(sector = '6', side = 'Rear')
+V6_klimaat <- read_delim('./data/klimaat/File6V_VDklimaat.txt', delim=';') %>% mutate(sector = '6', side = 'Front')
+```
+
+## Inladen temperatuur data per sector
+```{r}
+A1_temperatuur <- read_delim('./data/temperatuur/File1A_kastemperatuurklimaat.txt', delim=';') %>% mutate(sector = '1', side = 'Rear')
+V1_temperatuur <- read_delim('./data/temperatuur/File1V_kastemperatuurklimaat.txt', delim=';') %>% mutate(sector = '1', side = 'Front')
+A2_temperatuur <- read_delim('./data/temperatuur/File2A_kastemperatuurklimaat.txt', delim=';') %>% mutate(sector = '2', side = 'Rear')
+V2_temperatuur <- read_delim('./data/temperatuur/File2V_kastemperatuurklimaat.txt', delim=';') %>% mutate(sector = '2', side = 'Front')
+A5_temperatuur <- read_delim('./data/temperatuur/File5A_kastemperatuurklimaat.txt', delim=';') %>% mutate(sector = '5', side = 'Rear')
+V5_temperatuur <- read_delim('./data/temperatuur/File5V_kastemperatuurklimaat.txt', delim=';') %>% mutate(sector = '5', side = 'Front')
+A6_temperatuur <- read_delim('./data/temperatuur/File6A_kastemperatuurklimaat.txt', delim=';') %>% mutate(sector = '6', side = 'Rear')
+V6_temperatuur <- read_delim('./data/temperatuur/File6V_kastemperatuurklimaat.txt', delim=';') %>% mutate(sector = '6', side = 'Front')
+```
+
+## Inladen CO2 data per sector
+```{r}
+A1_co2 <- read_delim('./data/co2/File1A_CO2.txt', delim=';') %>% mutate(sector = '1', side = 'Rear')
+V1_co2 <- read_delim('./data/co2/File1V_CO2.txt', delim=';') %>% mutate(sector = '1', side = 'Front')
+A2_co2 <- read_delim('./data/co2/File2A_CO2.txt', delim=';') %>% mutate(sector = '2', side = 'Rear')
+V2_co2 <- read_delim('./data/co2/File2V_CO2.txt', delim=';') %>% mutate(sector = '2', side = 'Front')
+A5_co2 <- read_delim('./data/co2/File5A_CO2.txt', delim=';') %>% mutate(sector = '5', side = 'Rear')
+V5_co2 <- read_delim('./data/co2/File5V_CO2.txt', delim=';') %>% mutate(sector = '5', side = 'Front')
+A6_co2 <- read_delim('./data/co2/File6A_CO2.txt', delim=';') %>% mutate(sector = '6', side = 'Rear')
+V6_co2 <- read_delim('./data/co2/File6V_CO2.txt', delim=';') %>% mutate(sector = '6', side = 'Front')
+```
+
+## Inladen assimilatiebelichting per sector
+```{r}
+A1_assimilatiebelichting <- read_delim('./data/assimilatiebelichting/File1A_assimilatiebelichting.txt', delim=';') %>% mutate(sector = '1', side = 'Rear')
+V1_assimilatiebelichting <- read_delim('./data/assimilatiebelichting/File1V_assimilatiebelichting.txt', delim=';') %>% mutate(sector = '1', side = 'Front')
+A2_assimilatiebelichting <- read_delim('./data/assimilatiebelichting/File2A_assimilatiebelichting.txt', delim=';') %>% mutate(sector = '2', side = 'Rear')
+V2_assimilatiebelichting <- read_delim('./data/assimilatiebelichting/File2V_assimilatiebelichting.txt', delim=';') %>% mutate(sector = '2', side = 'Front')
+A5_assimilatiebelichting <- read_delim('./data/assimilatiebelichting/File5A_assimilatiebelichting.txt', delim=';') %>% mutate(sector = '5', side = 'Rear')
+V5_assimilatiebelichting <- read_delim('./data/assimilatiebelichting/File5V_assimilatiebelichting.txt', delim=';') %>% mutate(sector = '5', side = 'Front')
+A6_assimilatiebelichting <- read_delim('./data/assimilatiebelichting/File6A_assimilatiebelichting.txt', delim=';') %>% mutate(sector = '6', side = 'Rear')
+V6_assimilatiebelichting <- read_delim('./data/assimilatiebelichting/File6V_assimilatiebelichting.txt', delim=';') %>% mutate(sector = '6', side = 'Front')
+```
+
+## Inladen stand van luwezijderaam per sector
+```{r}
+A1_luwezijderaamstand <- read_delim('./data/luwezijderaamstand/File1A_luwezijderaamstand.txt', delim=';') %>% mutate(sector = '1', side = 'Rear')
+V1_luwezijderaamstand <- read_delim('./data/luwezijderaamstand/File1V_luwezijderaamstand.txt', delim=';') %>% mutate(sector = '1', side = 'Front')
+A2_luwezijderaamstand <- read_delim('./data/luwezijderaamstand/File2A_luwezijderaamstand.txt', delim=';') %>% mutate(sector = '2', side = 'Rear')
+V2_luwezijderaamstand <- read_delim('./data/luwezijderaamstand/File2V_luwezijderaamstand.txt', delim=';') %>% mutate(sector = '2', side = 'Front')
+A5_luwezijderaamstand <- read_delim('./data/luwezijderaamstand/File5A_luwezijderaamstand.txt', delim=';') %>% mutate(sector = '5', side = 'Rear')
+V5_luwezijderaamstand <- read_delim('./data/luwezijderaamstand/File5V_luwezijderaamstand.txt', delim=';') %>% mutate(sector = '5', side = 'Front')
+A6_luwezijderaamstand <- read_delim('./data/luwezijderaamstand/File6A_luwezijderaamstand.txt', delim=';') %>% mutate(sector = '6', side = 'Rear')
+V6_luwezijderaamstand <- read_delim('./data/luwezijderaamstand/File6V_luwezijderaamstand.txt', delim=';') %>% mutate(sector = '6', side = 'Front')
+```
+
+## Samenvoegen van data in tibbles
+```{r}
+# Klimaat
+klimaat <- bind_rows(A1_klimaat, V1_klimaat, A2_klimaat, V2_klimaat, A5_klimaat, V5_klimaat, A6_klimaat, V6_klimaat)
+
+# Temperatuur
+temperatuur <- bind_rows(A1_temperatuur, V1_temperatuur, A2_temperatuur, V2_temperatuur, A5_temperatuur, V5_temperatuur, A6_temperatuur, V6_temperatuur)
+
+# CO2
+co2 <- bind_rows(A1_co2, V1_co2, A2_co2, V2_co2, A5_co2, V5_co2, A6_co2, V6_co2)
+
+# Assimilatiebelichting
+assimilatiebelichting <- bind_rows(A1_assimilatiebelichting, V1_assimilatiebelichting, A2_assimilatiebelichting, V2_assimilatiebelichting, A5_assimilatiebelichting, V5_assimilatiebelichting, A6_assimilatiebelichting, V6_assimilatiebelichting)
+
+# Luwezijderaamstand
+luwezijderaamstand <- bind_rows(A1_luwezijderaamstand, V1_luwezijderaamstand, A2_luwezijderaamstand, V2_luwezijderaamstand, A5_luwezijderaamstand, V5_luwezijderaamstand, A6_luwezijderaamstand, V6_luwezijderaamstand)
+```
+
+## Join'em together!
+```{r}
+data <- full_join(klimaat, temperatuur, by = c("date", "time", "sector", "side"))
+data <- full_join(data, co2, by = c("date", "time", "sector", "side"))
+data <- full_join(data, assimilatiebelichting, by = c("date", "time", "sector", "side"))
+data <- full_join(data, luwezijderaamstand, by = c("date", "time", "sector", "side"))
+```
+
+## Clean it up :D
+```{r}
+data <- data %>% mutate(assimilatiebelichting = factor(assimilatiebelichting, levels = c(0, 100), labels=c("off", "on")))
+```
+
+## One beautiful Tibble
+```{r}
+data
+```
