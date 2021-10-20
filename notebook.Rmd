@@ -128,3 +128,26 @@ binnen
 buiten
 data
 ```
+
+```{r}
+data %>% filter(CO2 > 0) %>% ggplot(aes(x = side, y = CO2)) + geom_boxplot()
+```
+
+```{r}
+data %>% filter(kastemperatuurklimaat > 0) %>% ggplot(aes(x = side, y = kastemperatuurklimaat)) + geom_boxplot()
+```
+
+```{r}
+#making a corilation matrix
+test <- data %>% select(kastemperatuurklimaat, CO2, luwezijderaamstand)
+
+cormat <- round(cor(test),2)
+#You can see the matrix with cormat
+#reforming the data so it can be used in a heatmap
+
+test <- as.data.frame(matrix(cormat))
+test
+#showing the corrilation heatmap
+ggplot(data = test, aes(fill=value)) + 
+  geom_tile()
+```
