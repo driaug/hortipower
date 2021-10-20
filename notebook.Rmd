@@ -71,38 +71,60 @@ A6_luwezijderaamstand <- read_delim('./data/binnen/luwezijderaamstand/6A_luwezij
 V6_luwezijderaamstand <- read_delim('./data/binnen/luwezijderaamstand/6V_luwezijderaamstand.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '6', side = 'Front')
 ```
 
+## Inladen buitentemperatuur
+```{r}
+buitentemperatuur <- select(read_delim('./data/buiten/temperatuur.txt', delim=';', show_col_types = FALSE), -group)
+```
+
+## Inladen straling
+```{r}
+straling <- select(read_delim('./data/buiten/straling.txt', delim=';', show_col_types = FALSE), -group)
+```
+
+## Inladen stralingssom
+```{r}
+stralingssom <- select(read_delim('./data/buiten/stralingssom.txt', delim=';', show_col_types = FALSE), -group)
+```
+
 ## Samenvoegen van data in tibbles
 ```{r}
 # Klimaat
-klimaat <- bind_rows(A1_klimaat, V1_klimaat, A2_klimaat, V2_klimaat, A5_klimaat, V5_klimaat, A6_klimaat, V6_klimaat)
+klimaat <- select(bind_rows(A1_klimaat, V1_klimaat, A2_klimaat, V2_klimaat, A5_klimaat, V5_klimaat, A6_klimaat, V6_klimaat), -group)
 
 # Temperatuur
-temperatuur <- bind_rows(A1_temperatuur, V1_temperatuur, A2_temperatuur, V2_temperatuur, A5_temperatuur, V5_temperatuur, A6_temperatuur, V6_temperatuur)
+temperatuur <- select(bind_rows(A1_temperatuur, V1_temperatuur, A2_temperatuur, V2_temperatuur, A5_temperatuur, V5_temperatuur, A6_temperatuur, V6_temperatuur), -group)
 
 # CO2
-co2 <- bind_rows(A1_co2, V1_co2, A2_co2, V2_co2, A5_co2, V5_co2, A6_co2, V6_co2)
+co2 <- select(bind_rows(A1_co2, V1_co2, A2_co2, V2_co2, A5_co2, V5_co2, A6_co2, V6_co2), -group)
 
 # Assimilatiebelichting
-assimilatiebelichting <- bind_rows(A1_assimilatiebelichting, V1_assimilatiebelichting, A2_assimilatiebelichting, V2_assimilatiebelichting, A5_assimilatiebelichting, V5_assimilatiebelichting, A6_assimilatiebelichting, V6_assimilatiebelichting)
+assimilatiebelichting <- select(bind_rows(A1_assimilatiebelichting, V1_assimilatiebelichting, A2_assimilatiebelichting, V2_assimilatiebelichting, A5_assimilatiebelichting, V5_assimilatiebelichting, A6_assimilatiebelichting, V6_assimilatiebelichting), -group)
 
 # Luwezijderaamstand
-luwezijderaamstand <- bind_rows(A1_luwezijderaamstand, V1_luwezijderaamstand, A2_luwezijderaamstand, V2_luwezijderaamstand, A5_luwezijderaamstand, V5_luwezijderaamstand, A6_luwezijderaamstand, V6_luwezijderaamstand)
+luwezijderaamstand <- select(bind_rows(A1_luwezijderaamstand, V1_luwezijderaamstand, A2_luwezijderaamstand, V2_luwezijderaamstand, A5_luwezijderaamstand, V5_luwezijderaamstand, A6_luwezijderaamstand, V6_luwezijderaamstand), -group)
 ```
 
 ## Join'em together!
 ```{r}
-data <- full_join(klimaat, temperatuur, by = c("date", "time", "sector", "side"))
-data <- full_join(data, co2, by = c("date", "time", "sector", "side"))
-data <- full_join(data, assimilatiebelichting, by = c("date", "time", "sector", "side"))
-data <- full_join(data, luwezijderaamstand, by = c("date", "time", "sector", "side"))
+binnen <- full_join(klimaat, temperatuur, by = c("date", "time", "sector", "side"))
+binnen <- full_join(binnen, co2, by = c("date", "time", "sector", "side"))
+binnen <- full_join(binnen, assimilatiebelichting, by = c("date", "time", "sector", "side"))
+binnen <- full_join(binnen, luwezijderaamstand, by = c("date", "time", "sector", "side"))
+
+buiten <- full_join(buitentemperatuur, straling, by = c("date", "time"))
+buiten <- full_join(buiten, stralingssom, by = c("date", "time"))
+
+data <- full_join(binnen, buiten, by = c("date", "time"))
 ```
 
 ## Clean it up :D
 ```{r}
-data <- data %>% mutate(assimilatiebelichting = factor(assimilatiebelichting, levels = c(0, 100), labels=c("off", "on")))
+binnen <- binnen %>% mutate(assimilatiebelichting = factor(assimilatiebelichting, levels = c(0, 100), labels=c("off", "on")))
 ```
 
 ## One beautiful Tibble
 ```{r}
+binnen
+buiten
 data
 ```
