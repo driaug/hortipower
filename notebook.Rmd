@@ -20,6 +20,7 @@ If needed, we install the tidyverse package
 Next, we import the tidyverse package
 ```{r}
 library(tidyverse)
+library(hms)
 ```
 
 After this, we start loading all of our different data files.
@@ -109,7 +110,10 @@ HPS_diameter <- HPS_diameter %>% rename(DateTime = DateTime...3)
 
 HPS <- full_join(HPS_sapstroom, HPS_diameter, by = c('DateTime'))
 HPS <- HPS %>% mutate(type = 'HPS')
-HPS <- HPS %>% mutate(DateTime=as.POSIXct(DateTime, format = "%d/%m/%Y %H:%M"))
+HPS <- HPS %>% mutate(
+    datetime = as.POSIXct(DateTime, format = "%d/%m/%Y %H:%M"), 
+    date = as.Date(datetime, format = "%m/%d/%Y"), 
+    time = as.hms(datetime, format = "%H:%M:%S"))
 ```
 
 ## Loading LED tomato data
@@ -122,7 +126,10 @@ LED_diameter <- LED_diameter %>% rename(DateTime = DateTime...3)
 
 LED <- full_join(LED_sapstroom, LED_diameter, by = c('DateTime'))
 LED <- LED %>% mutate(type = 'LED')
-LED <- LED %>% mutate(DateTime=as.POSIXct(DateTime, format = "%d/%m/%Y %H:%M"))
+LED <- LED %>% mutate(
+    datetime = as.POSIXct(DateTime, format = "%d/%m/%Y %H:%M"), 
+    date = as.Date(datetime, format = "%m/%d/%Y"), 
+    time = as.hms(datetime, format = "%H:%M:%S"))
 ```
 
 ## Joining the data into tibbles
@@ -183,5 +190,13 @@ data %>% filter(kastemperatuurklimaat > 0) %>% ggplot(aes(x = side, y = kastempe
 ```
 
 ```{r}
-ggplot(tomaat) + geom_col(mapping = aes(x = DateTime, y = Sapstroom))
+ggplot(tomaat, mapping = aes(x = time, y = Sapstroom)) + geom_point(size=0.1, alpha=0.1) + geom_smooth(method = "lm")
+```
+
+```{r}
+ggplot(tomaat, mapping = aes(x = date, y = Sapstroom)) + geom_point(size=0.1, alpha=0.1) + geom_smooth()
+```
+
+```{r}
+ggplot(data, mapping = aes(x = date, y = buitentemperatuur)) + geom_point(size=0.1, alpha=0.1) + geom_smooth()
 ```
