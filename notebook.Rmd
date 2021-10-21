@@ -181,31 +181,56 @@ binnen
 buiten
 data
 ```
+## Visualisations
+
+Firstly, we wanted to see weather there were any major differences in the CO2 Levels between the front and the rear of the greenhouse. So we compared the co2 levels using a box plot. 
 
 ```{r}
 data %>% filter(CO2 > 0) %>% ggplot(aes(x = side, y = CO2)) + geom_boxplot()
 ```
+As you can see, the greenhouse manages to create a very homogeneous climate when it comes to CO2 levels, this suprised us as we thought that there would be higher CO2 concentrations in some areas as a result of the greenhouse workers passing it more often than other areas.
+
+Next, we wanted to see weather there were any major differences when it comes to the temperature levels between the front and rear areas using a boxplot.
 
 ```{r}
 data %>% filter(kastemperatuurklimaat > 0) %>% ggplot(aes(x = side, y = kastemperatuurklimaat)) + geom_boxplot()
 ```
+We were surprised to find out that the temperature is not very different between the sectors, as we would've expected this to be affected by the direction of the wind, given that some wind directions create colder wind than others. We were again impressed by the homogeneous nature of the greenhouse as there were no notable differences between the sectors. 
+
+After this, we decided to take a look at the tomato data and if there were any notable things to be seen, we started by analysing the juice flow and the way it changes throughout the 3 months of data that we were given. 
+
+```{r}
+ggplot(tomaat, mapping = aes(x = date, y = Sapstroom)) + geom_point(size=0.1, alpha=0.1) + geom_smooth()
+```
+As you can see, there are definitely some fluctuations in the juice flow of the tomato plants, particularly in July, one of the hottest months of the year, when the juice flow dipped lower than in the other 2 months. 
+
+We remembered that Fjo De Ridder told us that one of their main goals was to keep a homogeneous climate in the greenhouse throughout the year. They wanted to keep everything the same throughout the summer and winter months. We started to look at the temperature data on the outside to see how it changed through the year.
+
+```{r}
+data %>% filter(buitentemperatuur > -10) %>% ggplot(data, mapping = aes(x = date, y = buitentemperatuur)) + geom_point(size=0.1, alpha=0.1) + geom_smooth()
+```
+This graph shows a clear Belgian climate, the winters are quite cold with some dips below 0, while the summers are a lot warmer with some warm peaks , particularly in August.
+
+We were excited to find out what difference this data made to the inside of the greenhouse, so we made another grap with a trend line to find out if they were able to keep the greenhouse at a constant temperature.
+
+```{r}
+data %>% filter(kastemperatuurklimaat > -10) %>% ggplot(data, mapping = aes(x = date, y = kastemperatuurklimaat)) + geom_point(size=0.1, alpha=0.1) + geom_smooth()
+```
+
+Obviously, we expected something around these lines, constant temperatures in the winter/fall/spring, but what surprised us the most, was that the cooling of the greenhouse was insufficient to keep the temperature as low as in the other seasons when it started to get toasty (28°C-30°C) on the outside.
+
+In the dataset, we could see that there are two types of lighting which is given to the tomato plants. One is LED and the other is HPS. We thought it would be interesting to visualise wether there any differences in the plants performance (juice flow, diameter) between the two types of lighting. We used a scatter plot and two colors for the different lighting to show difference between the HPS and LED lighting in relation to the juice flow.
 
 ```{r}
 ggplot(tomaat, mapping = aes(x = time, y = Sapstroom, color=type)) + geom_point(size=0.1, alpha=0.1) + geom_smooth()
 ```
+We did not expect this! There is a major difference between the LED and the HPS lighting when it comes to the juice flow. A tomato plant his juice flow will be significantly higher when you light it with LED lights as opposed to HPS lights. What also struck us, is that at night, the plants go 'to sleep', as Fjo De Ridder mentioned to us.
+
+Finally, we wanted to visualise the difference in performance of the tomato plant when it came to its diameter. We made this graph to accentuate the small but very profound difference between the two types of lighting.  
+
 
 ```{r}
 ggplot(tomaat, mapping = aes(x = date, y = Diameter, color=type)) + geom_point(size=0.1, alpha=0.1) + geom_smooth()
 ```
 
-```{r}
-ggplot(tomaat, mapping = aes(x = date, y = Sapstroom)) + geom_point(size=0.1, alpha=0.1) + geom_smooth()
-```
-
-```{r}
-data %>% filter(buitentemperatuur > -10) %>% ggplot(data, mapping = aes(x = date, y = buitentemperatuur)) + geom_point(size=0.1, alpha=0.1) + geom_smooth()
-```
-
-```{r}
-data %>% filter(kastemperatuurklimaat > -10) %>% ggplot(data, mapping = aes(x = date, y = kastemperatuurklimaat, color=side)) + geom_point(size=0.1, alpha=0.1) + geom_smooth()
-```
+As you can clearly see, the HPS-lit tomatoes their diameter grows a lot faster and reaches a higher peak, while the LED-lit grow slower and don't nearly become as wide as the HPS-lit tomatoes. This was very interesting, but as we are not plant experts, we don't know weather this diameter increase is good or bad for the size and taste of the tomato. 
