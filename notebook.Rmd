@@ -195,7 +195,7 @@ ggplot(tomaat, mapping = aes(x = time, y = Sapstroom, color=type)) + geom_point(
 ```
 
 ```{r}
-ggplot(tomaat, mapping = aes(x = date, y = Diameter)) + geom_point(size=0.1, alpha=0.1) + geom_smooth()
+ggplot(tomaat, mapping = aes(x = date, y = Diameter, color=type)) + geom_point(size=0.1, alpha=0.1) + geom_smooth()
 ```
 
 ```{r}
@@ -207,5 +207,5 @@ data %>% filter(buitentemperatuur > -10) %>% ggplot(data, mapping = aes(x = date
 ```
 
 ```{r}
-data %>% filter(kastemperatuurklimaat > -10) %>% ggplot(data, mapping = aes(x = date, y = kastemperatuurklimaat)) + geom_point(size=0.1, alpha=0.1) + geom_smooth()
+data %>% filter(kastemperatuurklimaat > -10) %>% ggplot(data, mapping = aes(x = date, y = kastemperatuurklimaat, color=side)) + geom_point(size=0.1, alpha=0.1) + geom_smooth()
 ```
