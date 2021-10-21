@@ -2,16 +2,29 @@
 title: "Hortipower Notebook"
 output: html_notebook
 ---
+**Group 3**
+
+* Group members:
+    - Dries Augustyns
+    - Miguel Haest
+    - Niels Baptist
+
+We will report our findings of the kaggle dataset of **Hortipower**
+
+If needed, we install the tidyverse package
 
 ```{r}
-# install.packages("tidyverse")
+#install.packages("tidyverse")
 ```
 
+Next, we import the tidyverse package
 ```{r}
 library(tidyverse)
 ```
 
-## Inladen klimaat data per sector
+After this, we start loading all of our different data files.
+
+## Loading climate data per sector 
 ```{r}
 A1_klimaat <- read_delim('./data/binnen/vd_klimaat/1A_vd_klimaat.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '1', side = 'Rear')
 V1_klimaat <- read_delim('./data/binnen/vd_klimaat/1V_vd_klimaat.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '1', side = 'Front')
@@ -23,7 +36,7 @@ A6_klimaat <- read_delim('./data/binnen/vd_klimaat/6A_vd_klimaat.txt', delim=';'
 V6_klimaat <- read_delim('./data/binnen/vd_klimaat/6V_vd_klimaat.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '6', side = 'Front')
 ```
 
-## Inladen temperatuur data per sector
+## Loading temparature data per sector
 ```{r}
 A1_temperatuur <- read_delim('./data/binnen/temperatuur/1A_kastemperatuurklimaat.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '1', side = 'Rear')
 V1_temperatuur <- read_delim('./data/binnen/temperatuur/1V_kastemperatuurklimaat.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '1', side = 'Front')
@@ -35,7 +48,7 @@ A6_temperatuur <- read_delim('./data/binnen/temperatuur/6A_kastemperatuurklimaat
 V6_temperatuur <- read_delim('./data/binnen/temperatuur/6V_kastemperatuurklimaat.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '6', side = 'Front')
 ```
 
-## Inladen CO2 data per sector
+## Loading CO2 data per sector
 ```{r}
 A1_co2 <- read_delim('./data/binnen/co2/1A_CO2.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '1', side = 'Rear')
 V1_co2 <- read_delim('./data/binnen/co2/1V_CO2.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '1', side = 'Front')
@@ -47,7 +60,7 @@ A6_co2 <- read_delim('./data/binnen/co2/6A_CO2.txt', delim=';', show_col_types =
 V6_co2 <- read_delim('./data/binnen/co2/6V_CO2.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '6', side = 'Front')
 ```
 
-## Inladen assimilatiebelichting per sector
+## Loading lighting per sector
 ```{r}
 A1_assimilatiebelichting <- read_delim('./data/binnen/assimilatiebelichting/1A_assimilatiebelichting.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '1', side = 'Rear')
 V1_assimilatiebelichting <- read_delim('./data/binnen/assimilatiebelichting/1V_assimilatiebelichting.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '1', side = 'Front')
@@ -59,7 +72,7 @@ A6_assimilatiebelichting <- read_delim('./data/binnen/assimilatiebelichting/6A_a
 V6_assimilatiebelichting <- read_delim('./data/binnen/assimilatiebelichting/6V_assimilatiebelichting.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '6', side = 'Front')
 ```
 
-## Inladen stand van luwezijderaam per sector
+## Loading lee side window state per sector
 ```{r}
 A1_luwezijderaamstand <- read_delim('./data/binnen/luwezijderaamstand/1A_luwezijderaamstand.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '1', side = 'Rear')
 V1_luwezijderaamstand <- read_delim('./data/binnen/luwezijderaamstand/1V_luwezijderaamstand.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '1', side = 'Front')
@@ -71,22 +84,22 @@ A6_luwezijderaamstand <- read_delim('./data/binnen/luwezijderaamstand/6A_luwezij
 V6_luwezijderaamstand <- read_delim('./data/binnen/luwezijderaamstand/6V_luwezijderaamstand.txt', delim=';', show_col_types = FALSE) %>% mutate(sector = '6', side = 'Front')
 ```
 
-## Inladen buitentemperatuur
+## Loading temperature outside
 ```{r}
 buitentemperatuur <- select(read_delim('./data/buiten/temperatuur.txt', delim=';', show_col_types = FALSE), -group)
 ```
 
-## Inladen straling
+## loading solar radiation
 ```{r}
 straling <- select(read_delim('./data/buiten/straling.txt', delim=';', show_col_types = FALSE), -group)
 ```
 
-## Inladen stralingssom
+## loading the sum of solar radiation
 ```{r}
 stralingssom <- select(read_delim('./data/buiten/stralingssom.txt', delim=';', show_col_types = FALSE), -group)
 ```
 
-## Inladen HPS tomaat
+## Loading HPS tomato data
 ```{r}
 HPS_sapstroom <- select(read_delim('./data/tomaat/HPS.txt', delim=';', locale=locale(decimal_mark=","), col_types = cols(DateTime = col_character(), Sapstroom = col_double(), Diameter = col_double(), type = col_character())), DateTime...1, Sapstroom)
 HPS_diameter <- select(read_delim('./data/tomaat/HPS.txt', delim=';', locale=locale(decimal_mark=","), col_types = cols(DateTime = col_character(), Sapstroom = col_double(), Diameter = col_double(), type = col_character())), DateTime...3, Diameter)
@@ -99,7 +112,7 @@ HPS <- HPS %>% mutate(type = 'HPS')
 HPS <- HPS %>% mutate(DateTime=as.POSIXct(DateTime, format = "%d/%m/%Y %H:%M"))
 ```
 
-## Inladen LED tomaat
+## Loading LED tomato data
 ```{r}
 LED_sapstroom <- select(read_delim('./data/tomaat/LED.txt', delim=';', locale=locale(decimal_mark=","), col_types = cols(DateTime = col_character(), Sapstroom = col_double(), Diameter = col_double(), type = col_character())), DateTime...1, Sapstroom)
 LED_diameter <- select(read_delim('./data/tomaat/LED.txt', delim=';', locale=locale(decimal_mark=","), col_types = cols(DateTime = col_character(), Sapstroom = col_double(), Diameter = col_double(), type = col_character())), DateTime...3, Diameter)
@@ -112,7 +125,7 @@ LED <- LED %>% mutate(type = 'LED')
 LED <- LED %>% mutate(DateTime=as.POSIXct(DateTime, format = "%d/%m/%Y %H:%M"))
 ```
 
-## Samenvoegen van data in tibbles
+## Joining the data into tibbles
 ```{r}
 # Klimaat
 klimaat <- select(bind_rows(A1_klimaat, V1_klimaat, A2_klimaat, V2_klimaat, A5_klimaat, V5_klimaat, A6_klimaat, V6_klimaat), -group)
@@ -135,7 +148,7 @@ tomaat <- tomaat %>% mutate(Sapstroom = round(Sapstroom, digits=1))
 tomaat
 ```
 
-## Join'em together!
+## Joining the inside & outside data
 ```{r}
 binnen <- full_join(klimaat, temperatuur, by = c("date", "time", "sector", "side"))
 binnen <- full_join(binnen, co2, by = c("date", "time", "sector", "side"))
@@ -149,12 +162,12 @@ data <- full_join(binnen, buiten, by = c("date", "time"))
 data <- data %>% mutate(date = as.Date(date, format='%d-%m-%Y'))
 ```
 
-## Clean it up :D
+## Cleaning it up
 ```{r}
 binnen <- binnen %>% mutate(assimilatiebelichting = factor(assimilatiebelichting, levels = c(0, 100), labels=c("off", "on")))
 ```
 
-## One beautiful Tibble
+## The data as one Tibble
 ```{r}
 binnen
 buiten
