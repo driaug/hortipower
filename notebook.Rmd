@@ -152,6 +152,7 @@ luwezijderaamstand <- select(bind_rows(A1_luwezijderaamstand, V1_luwezijderaamst
 # Tomaat-sensors
 tomaat <- bind_rows(LED, HPS)
 tomaat <- tomaat %>% mutate(Sapstroom = round(Sapstroom, digits=1))
+tomaat <- tomaat %>% mutate(type = as.factor(type))
 tomaat
 ```
 
@@ -190,7 +191,7 @@ data %>% filter(kastemperatuurklimaat > 0) %>% ggplot(aes(x = side, y = kastempe
 ```
 
 ```{r}
-ggplot(tomaat, mapping = aes(x = date, y = Sapstroom)) + geom_point(size=0.1, alpha=0.1) + geom_smooth()
+ggplot(tomaat, mapping = aes(x = time, y = Sapstroom, color=type)) + geom_point(size=0.1, alpha=0.1) + geom_smooth()
 ```
 
 ```{r}
