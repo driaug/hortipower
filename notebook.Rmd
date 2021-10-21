@@ -86,6 +86,32 @@ straling <- select(read_delim('./data/buiten/straling.txt', delim=';', show_col_
 stralingssom <- select(read_delim('./data/buiten/stralingssom.txt', delim=';', show_col_types = FALSE), -group)
 ```
 
+## Inladen HPS tomaat
+```{r}
+HPS_sapstroom <- select(read_delim('./data/tomaat/HPS.txt', delim=';', locale=locale(decimal_mark=","), col_types = cols(DateTime = col_character(), Sapstroom = col_double(), Diameter = col_double(), type = col_character())), DateTime...1, Sapstroom)
+HPS_diameter <- select(read_delim('./data/tomaat/HPS.txt', delim=';', locale=locale(decimal_mark=","), col_types = cols(DateTime = col_character(), Sapstroom = col_double(), Diameter = col_double(), type = col_character())), DateTime...3, Diameter)
+
+HPS_sapstroom <- HPS_sapstroom %>% rename(DateTime = DateTime...1)
+HPS_diameter <- HPS_diameter %>% rename(DateTime = DateTime...3)
+
+HPS <- full_join(HPS_sapstroom, HPS_diameter, by = c('DateTime'))
+HPS <- HPS %>% mutate(type = 'HPS')
+HPS <- HPS %>% mutate(DateTime=as.POSIXct(DateTime, format = "%d/%m/%Y %H:%M"))
+```
+
+## Inladen LED tomaat
+```{r}
+LED_sapstroom <- select(read_delim('./data/tomaat/LED.txt', delim=';', locale=locale(decimal_mark=","), col_types = cols(DateTime = col_character(), Sapstroom = col_double(), Diameter = col_double(), type = col_character())), DateTime...1, Sapstroom)
+LED_diameter <- select(read_delim('./data/tomaat/LED.txt', delim=';', locale=locale(decimal_mark=","), col_types = cols(DateTime = col_character(), Sapstroom = col_double(), Diameter = col_double(), type = col_character())), DateTime...3, Diameter)
+
+LED_sapstroom <- LED_sapstroom %>% rename(DateTime = DateTime...1)
+LED_diameter <- LED_diameter %>% rename(DateTime = DateTime...3)
+
+LED <- full_join(LED_sapstroom, LED_diameter, by = c('DateTime'))
+LED <- LED %>% mutate(type = 'LED')
+LED <- LED %>% mutate(DateTime=as.POSIXct(DateTime, format = "%d/%m/%Y %H:%M"))
+```
+
 ## Samenvoegen van data in tibbles
 ```{r}
 # Klimaat
@@ -102,6 +128,11 @@ assimilatiebelichting <- select(bind_rows(A1_assimilatiebelichting, V1_assimilat
 
 # Luwezijderaamstand
 luwezijderaamstand <- select(bind_rows(A1_luwezijderaamstand, V1_luwezijderaamstand, A2_luwezijderaamstand, V2_luwezijderaamstand, A5_luwezijderaamstand, V5_luwezijderaamstand, A6_luwezijderaamstand, V6_luwezijderaamstand), -group)
+
+# Tomaat-sensors
+tomaat <- bind_rows(LED, HPS)
+tomaat <- tomaat %>% mutate(Sapstroom = round(Sapstroom, digits=1))
+tomaat
 ```
 
 ## Join'em together!
@@ -115,6 +146,7 @@ buiten <- full_join(buitentemperatuur, straling, by = c("date", "time"))
 buiten <- full_join(buiten, stralingssom, by = c("date", "time"))
 
 data <- full_join(binnen, buiten, by = c("date", "time"))
+data <- data %>% mutate(date = as.Date(date, format='%d-%m-%Y'))
 ```
 
 ## Clean it up :D
@@ -138,16 +170,5 @@ data %>% filter(kastemperatuurklimaat > 0) %>% ggplot(aes(x = side, y = kastempe
 ```
 
 ```{r}
-#making a corilation matrix
-test <- data %>% select(kastemperatuurklimaat, CO2, luwezijderaamstand)
-
-cormat <- round(cor(test),2)
-#You can see the matrix with cormat
-#reforming the data so it can be used in a heatmap
-
-test <- as.data.frame(matrix(cormat))
-test
-#showing the corrilation heatmap
-ggplot(data = test, aes(fill=value)) + 
-  geom_tile()
+ggplot(tomaat) + geom_col(mapping = aes(x = DateTime, y = Sapstroom))
 ```
