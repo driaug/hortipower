@@ -190,8 +190,7 @@ data %>% filter(kastemperatuurklimaat > 0) %>% ggplot(aes(x = side, y = kastempe
 ```
 
 ```{r}
-ggplot(tomaat) + geom_point(mapping = aes(x = time, y = Sapstroom), size=0.1, alpha=0.1) + geom_smooth() + geom_point(mapping = aes(x = time, y = Diameter), size=0.1, alpha=0.1) + geom_smooth()
-```
+ggplot(tomaat, mapping = aes(x = date, y = Sapstroom)) + geom_point(size=0.1, alpha=0.1) + geom_smooth()
 ```
 
 ```{r}
