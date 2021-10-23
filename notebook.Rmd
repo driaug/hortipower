@@ -9,7 +9,10 @@ output: html_notebook
     - Miguel Haest
     - Niels Baptist
 
-We will report our findings of the kaggle dataset of **Hortipower**
+## Introduction
+In this notebook, We will report our findings of the kaggle dataset of **Hortipower**, the data consists out of sensor data from a tomato growing greenhouse. We will visualise and report some of the most interesting data insights we discovered, we hope that we can add a valuable contribution. 
+
+## Packages
 
 If needed, we install the tidyverse package
 
@@ -234,3 +237,10 @@ ggplot(tomaat, mapping = aes(x = date, y = Diameter, color=type)) + geom_point(s
 ```
 
 As you can clearly see, the HPS-lit tomatoes their diameter grows a lot faster and reaches a higher peak, while the LED-lit grow slower and don't nearly become as wide as the HPS-lit tomatoes. This was very interesting, but as we are not plant experts, we don't know weather this diameter increase is good or bad for the size and taste of the tomato. 
+
+
+## Conclusion
+Working with the Hortipower dataset was very interesting and challenging to say the least. We believe that we gained some useful insights in the data, especially when it comes to the difference between the LED-lit and the HPS-lit tomato plants, and we hope that we made a useful contribution voor KCE and Hortipower.
+
+Kindest regards
+Miguel, Dries & Niels
