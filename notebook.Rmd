@@ -200,6 +200,16 @@ data %>% filter(kastemperatuurklimaat > 0) %>% ggplot(aes(x = side, y = kastempe
 ```
 We were surprised to find out that the temperature is not very different between the sectors, as we would've expected this to be affected by the direction of the wind, given that some wind directions create colder wind than others. We were again impressed by the homogeneous nature of the greenhouse as there were no notable differences between the sectors. 
 
+
+The reason we filtered the kastentemperatuurklimaat > 0 is because there are some datapoints that around -3000 degrees this is just not realistic so we filtered it so the data would be more accurate. 
+
+```{r}
+data %>% ggplot(aes(x = date, y = kastemperatuurklimaat)) + geom_point(size=0.1, alpha=0.1)
+```
+As you can see there are some random points where the readings of the temperature are really low. This is probably because of a malfunction in the thermometers.
+
+
+
 After this, we decided to take a look at the tomato data and if there were any notable things to be seen, we started by analysing the juice flow and the way it changes throughout the 3 months of data that we were given. 
 
 ```{r}
@@ -228,6 +238,15 @@ In the dataset, we could see that there are two types of lighting which is given
 ggplot(tomaat, mapping = aes(x = time, y = Sapstroom, color=type)) + geom_point(size=0.1, alpha=0.1) + geom_smooth()
 ```
 We did not expect this! There is a major difference between the LED and the HPS lighting when it comes to the juice flow. A tomato plant his juice flow will be significantly higher when you light it with LED lights as opposed to HPS lights. What also struck us, is that at night, the plants go 'to sleep', as Fjo De Ridder mentioned to us.
+
+
+Now we will revisit the juice flow graph over the dates but we will also see again the type of lighting and what effect it has on the juice flow and maybe the data differs over the months.
+
+```{r}
+ggplot(tomaat, mapping = aes(x = date, y = Sapstroom, color=type)) + geom_point(size=0.1, alpha=0.1) + geom_smooth()
+```
+As you can see the juice flow for LED-lit tomatoes is on average a lot higher then the HPS-lit tomatoes. Even if we look at the data over the months. This graph is what we expected to see when we saw the data above.
+
 
 Finally, we wanted to visualise the difference in performance of the tomato plant when it came to its diameter. We made this graph to accentuate the small but very profound difference between the two types of lighting.  
 
